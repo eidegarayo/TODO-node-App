@@ -1,0 +1,33 @@
+extends layout/index
+
+block content
+  header
+    h1 Todo List
+    .subl Welcome to the Todo app by @eva. Please enjoy.
+  
+  .line.form-line
+    .column-left
+      button.btn.btn-succes.allDone all done
+    .column-center
+      form(action='/tasks', method='POST', role='form')
+        .form-group
+          input.form-control(type='text', name='taskTitle', id='taskTitle', placeholder='Add a new task', autofocus=true)
+          button.btn.btn-primary(type='submit') Add
+  .list
+    if (tasks)
+      each task, i in tasks
+        .line.task-line
+          .column-left 
+            button.btn.btn-succes.done(data-id=task.id) done
+          .column-center 
+            p.taskTitle #{i + 1} -  
+              span.taskTitleForEdit #{task.title} 
+              button.btn.btn-primary.edit(data-id=task.id) edit
+              br
+              small
+                em (Created: #{task.created})
+          .column-right
+            button.btn.btn-danger.delete(data-id=task.id) delete
+      else
+        p no tasks
+    

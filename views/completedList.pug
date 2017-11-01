@@ -1,0 +1,16 @@
+extends layout/index
+
+block content
+  header
+    h1 Completed
+  
+  .completedList
+    if (tasks)
+      button.btn.btn-danger.deleteAll delete all
+      each task, i in tasks
+        p #{i + 1} -  
+          del  #{task.title} 
+            small
+              em (Created: #{task.created})
+      else 
+        p no tasks
